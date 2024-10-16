@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Root Watching</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    
+        
+</head>
+
+<body>
+    <div class="container">
+        <!-- Textbox and buttons on the left -->
+        <div class="textbox-controls">
+            <div class="textbox">
+                <p>.｡*ﾟ+.*.｡ଘ( ᐛ ) ଓ+..｡*ﾟ+</p>
+                <p>Hello there! <strong>Root Watching</strong> is an online drawing pad that allows you to imagine otherworldly scenes by tracing the roots of a bonsai plant.</p>
+                <p><strong>Instructions:</strong></p>
+                <ul>
+                    <li>Simply use your trackpad or mouse to draw over the image</li>
+                    <li>There are no rules—just draw what you see</li>
+                    <li>Click 'Save' to save your drawing</li>
+                    <li>Upload your saved JPEG to <a href="https://www.are.na/zarer-lim/root-creatures" target="blank">Are.na</a>to meet the others</li>
+                    <li>٩( ᐛ )☆ﾟ.*･｡ﾟ☆( ᐖ )۶</li>
+
+                </ul>
+            </div>
+            
+
+            <!-- Controls below the text box -->
+            <div class="controls">
+                <button id="restartButton">Undo</button>
+                <button id="saveButton">Save</button>
+                <input type="color" id="colorPicker">
+            </div>
+        </div>
+
+        <!-- Canvas on the right -->
+        <script>
+            let canvas;
+            let drawings = [];
+            let currentPath = [];
+            let isDrawing = false;
+            let px, py;
+            let bgImage;
+            let drawColor = '#000000';
+
+            function preload() {
+                bgImage = loadImage('bonsai-at-kovan-ban-nee-chen.jpg'); // Load the background image
+            }
+
+            function setup() {
+                canvas = createCanvas(600, 712);
+                canvas.mousePressed(startPath);
+                canvas.mouseReleased(endPath);
+
+                // Restart button
+                let undoButton = select('#restartButton');
+                undoButton.mousePressed(undoLastPath);
+
+                // Save button
+                let saveButton = select('#saveButton');
+                saveButton.mousePressed(saveDrawing);
+
+                // Color picker
+                let colorPicker = select('#colorPicker');
+                colorPicker.input(() => {
+                    drawColor = colorPicker.value(); // Update drawColor when user picks a color
+                });
+            }
+
+            function startPath() {
+                px = mouseX;
+                py = mouseY;
+                isDrawing = true;
+                currentPath = [];
+                drawings.push(currentPath);
+            }
+
+            function endPath() {
+                isDrawing = false;
+            }
+
+            function draw() {
+                // Draw the background image
+                image(bgImage, 0, 0, width, height);
+
+                if (isDrawing) {
+                    let point = {
+                        x1: px,
+                        y1: py,
+                        x2: mouseX,
+                        y2: mouseY
+                    };
+                    currentPath.push(point);
+                    px = mouseX;
+                    py = mouseY;
+                }
+
+                // Draw all paths
+                for (let i = 0; i < drawings.length; i++) {
+                    let path = drawings[i];
+                    if (path.length != 0) {
+                        for (let j = 0; j < path.length; j++) {
+                            strokeWeight(2);
+                            stroke(drawColor); // Use the selected color for drawing
+                            line(path[j].x1, path[j].y1, path[j].x2, path[j].y2);
+                        }
+                    }
+                }
+            }
+
+            // Function to undo the last path
+            function undoLastPath() {
+                if (drawings.length > 0) {
+                    drawings.pop(); // Remove the last path
+                }
+            }
+
+            // Function to save the current drawing
+            function saveDrawing() {
+                // Temporarily hide the background image
+                clear(); // This clears the canvas
+
+                // Set the background to white
+                background(255); // Set the background color to white
+
+                // Redraw just the paths without the background
+                for (let i = 0; i < drawings.length; i++) {
+                    let path = drawings[i];
+                    if (path.length != 0) {
+                        for (let j = 0; j < path.length; j++) {
+                            strokeWeight(2);
+                            stroke(drawColor);
+                            line(path[j].x1, path[j].y1, path[j].x2, path[j].y2);
+                        }
+                    }
+                }
+
+                // Save the canvas as a JPEG with a white background
+                saveCanvas(canvas, 'myDrawing', 'jpg');
+
+                // Redraw the background and paths after saving
+                image(bgImage, 0, 0, width, height); // Restore the background image
+                for (let i = 0; i < drawings.length; i++) {
+                    let path = drawings[i];
+                    if (path.length != 0) {
+                        for (let j = 0; j < path.length; j++) {
+                            strokeWeight(2);
+                            stroke(drawColor);
+                            line(path[j].x1, path[j].y1, path[j].x2, path[j].y2);
+                        }
+                    }
+                }
+            }
+        </script>
+
+    </div>
+    <footer>
+        <p>Image taken at Ban Nee Chen Retail @ Kovan with iPhone - painted over with white Posca marker 2024 </p>
+    </footer>
+
+</body>
+
+
+</html>

@@ -1,0 +1,109 @@
+* {
+    margin: 10px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0; /* Remove default margin to prevent scrolling */
+    overflow: hidden; /* Prevent scrolling */
+    font-family: 'Courier New', Courier, monospace;
+    color: #4a4a4a; /* Soft charcoal color for text */
+}
+
+/* Other existing styles */
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 600px;
+
+}
+
+.textbox-controls {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    position: relative; /* Set position for absolute footer */
+
+}
+
+.textbox {
+    background-color: rgba(255, 255, 255, 0.9);
+
+
+}
+
+.controls {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+}
+
+button,
+input[type="color"] {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #b2956b;
+    /* Earthy brown color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #a27c52;
+    /* Darker tone for hover effect */
+}
+
+input[type="color"] {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+canvas {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    border: 5px solid #b2956b;
+    /* Warm earth tone border */
+    margin-left: 200px;
+}
+
+a {
+    color: #b2956b;
+    /* Earthy brown color for the link */
+    text-decoration: underline;
+    /* Remove underline */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #a27c52;
+    /* Darker brown color on hover */
+    text-decoration: underline;
+    /* Underline on hover */
+    font-weight: bold;
+
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: #4a4a4a;
+    padding: 10px; /* Optional padding for the footer */
+}
+
+footer {
+    text-align: left; /* Center the footer text */
+    position: absolute; /* Position at the bottom */
+    bottom: 1px; /* 10px from the bottom */
+    font-size: 10px;
+}
