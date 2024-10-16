@@ -15,14 +15,12 @@ body {
 
 /* Other existing styles */
 
-
 .container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
     width: 600px;
-
 }
 
 .textbox-controls {
@@ -30,13 +28,10 @@ body {
     flex-direction: column;
     max-width: 500px;
     position: relative; /* Set position for absolute footer */
-
 }
 
 .textbox {
     background-color: rgba(255, 255, 255, 0.9);
-
-
 }
 
 .controls {
@@ -50,8 +45,7 @@ input[type="color"] {
     margin-top: 10px;
     padding: 10px;
     font-size: 16px;
-    background-color: #b2956b;
-    /* Earthy brown color */
+    background-color: #b2956b; /* Earthy brown color */
     color: white;
     border: none;
     border-radius: 5px;
@@ -60,8 +54,7 @@ input[type="color"] {
 }
 
 button:hover {
-    background-color: #a27c52;
-    /* Darker tone for hover effect */
+    background-color: #a27c52; /* Darker tone for hover effect */
 }
 
 input[type="color"] {
@@ -71,26 +64,21 @@ input[type="color"] {
 
 canvas {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-    border: 5px solid #b2956b;
-    /* Warm earth tone border */
-    margin-left: 200px;
+    border: 5px solid #b2956b; /* Warm earth tone border */
+    width: 600px; /* Default width for larger screens */
+    height: auto; /* Maintain aspect ratio */
 }
 
 a {
-    color: #b2956b;
-    /* Earthy brown color for the link */
-    text-decoration: underline;
-    /* Remove underline */
+    color: #b2956b; /* Earthy brown color for the link */
+    text-decoration: underline; /* Remove underline */
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #a27c52;
-    /* Darker brown color on hover */
-    text-decoration: underline;
-    /* Underline on hover */
+    color: #a27c52; /* Darker brown color on hover */
+    text-decoration: underline; /* Underline on hover */
     font-weight: bold;
-
 }
 
 footer {
@@ -99,11 +87,29 @@ footer {
     font-size: 14px;
     color: #4a4a4a;
     padding: 10px; /* Optional padding for the footer */
-}
-
-footer {
-    text-align: left; /* Center the footer text */
     position: absolute; /* Position at the bottom */
     bottom: 1px; /* 10px from the bottom */
-    font-size: 10px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack elements vertically on small screens */
+        display: flex;
+        width: 100%; /* Full width */
+        height: auto; /* Allow height to adjust */
+        padding: 20px; /* Add padding for smaller screens */
+    }
+
+
+    .textbox-controls {
+        max-width: 100%; /* Full width on small screens */
+        margin: 0; /* Remove margin */
+        display: flex;
+    }
+
+    .canvas-container {
+        width: 100%; /* Make canvas container full width */
+        display: flex
+    }
 }
